@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberPath — Your Cybersecurity Journey</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a0e;
+    --bg2: #080f14;
+    --bg3: #0c151c;
+    --panel: #0d1b24;
+    --panel2: #112230;
+    --green: #00ff9d;
+    --green2: #00cc7a;
+    --cyan: #00e5ff;
+    --red: #ff3860;
+    --yellow: #ffd700;
+    --orange: #ff8c00;
+    --purple: #b44fff;
+    --text: #c8d8e8;
+    --text2: #7a9ab0;
+    --border: #1a3045;
+    --glow: 0 0 20px rgba(0,255,157,0.15);
+    --glow-strong: 0 0 30px rgba(0,255,157,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.04) 2px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* GRID BACKGROUND */
+  .grid-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,255,157,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,157,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(5,10,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--green);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-shadow: var(--glow-strong);
+  }
+
+  .nav-logo span { color: var(--cyan); }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.4rem 0.7rem;
+    border-radius: 3px;
+    transition: all 0.2s;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .nav-links a:hover {
+    color: var(--green);
+    background: rgba(0,255,157,0.07);
+  }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+  .hero-tag {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--green);
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .hero-tag::before { content: '> '; }
+
+  h1 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+  }
+
+  h1 .accent { color: var(--green); text-shadow: var(--glow-strong); }
+  h1 .accent2 { color: var(--cyan); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text2);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+
+  .btn-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0,255,157,0.4);
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    box-shadow: 0 0 35px rgba(0,255,157,0.7);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,229,255,0.1);
+    box-shadow: 0 0 20px rgba(0,229,255,0.3);
+    transform: translateY(-2px);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.8rem;
+    color: var(--green);
+    text-shadow: var(--glow);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  h2 .hl { color: var(--green); }
+  h2 .hl2 { color: var(--cyan); }
+
+  .section-desc {
+    color: var(--text2);
+    margin-top: 0.75rem;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* ROADMAP */
+  .roadmap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green), var(--cyan), var(--purple));
+    opacity: 0.4;
+  }
+
+  .road-item {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    position: relative;
+  }
+
+  .road-dot {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--green);
+    background: var(--bg);
+    flex-shrink: 0;
+    box-shadow: var(--glow);
+    z-index: 1;
+    transition: all 0.3s;
+  }
+
+  .road-item:hover .road-dot {
+    background: var(--green);
+    color: #000;
+    box-shadow: var(--glow-strong);
+  }
+
+  .road-item.cyan .road-dot { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 15px rgba(0,229,255,0.2); }
+  .road-item.cyan:hover .road-dot { background: var(--cyan); color: #000; }
+  .road-item.purple .road-dot { border-color: var(--purple); color: var(--purple); box-shadow: 0 0 15px rgba(180,79,255,0.2); }
+  .road-item.orange .road-dot { border-color: var(--orange); color: var(--orange); box-shadow: 0 0 15px rgba(255,140,0,0.2); }
+  .road-item.red .road-dot { border-color: var(--red); color: var(--red); box-shadow: 0 0 15px rgba(255,56,96,0.2); }
+
+  .road-content {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+    transition: all 0.3s;
+  }
+
+  .road-item:hover .road-content {
+    border-color: rgba(0,255,157,0.3);
+    background: var(--panel2);
+  }
+
+  .road-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+
+  .road-level {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--green);
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .road-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .tag {
+    background: rgba(0,255,157,0.07);
+    border: 1px solid rgba(0,255,157,0.2);
+    color: var(--green);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .tag.cyan { background: rgba(0,229,255,0.07); border-color: rgba(0,229,255,0.2); color: var(--cyan); }
+  .tag.purple { background: rgba(180,79,255,0.07); border-color: rgba(180,79,255,0.2); color: var(--purple); }
+  .tag.orange { background: rgba(255,140,0,0.07); border-color: rgba(255,140,0,0.2); color: var(--orange); }
+  .tag.red { background: rgba(255,56,96,0.07); border-color: rgba(255,56,96,0.2); color: var(--red); }
+
+  /* GRID LAYOUTS */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1.5rem; }
+
+  /* CARDS */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    border-color: rgba(0,255,157,0.25);
+    background: var(--panel2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-sub {
+    font-size: 0.75rem;
+    color: var(--green);
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .card p { color: var(--text2); font-size: 0.88rem; line-height: 1.6; }
+
+  /* CERT CARDS */
+  .cert-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.3s;
+  }
+
+  .cert-card:hover {
+    border-color: rgba(0,255,157,0.3);
+    background: var(--panel2);
+    transform: translateY(-2px);
+  }
+
+  .cert-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .cert-info .cert-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .cert-info .cert-org {
+    font-size: 0.7rem;
+    color: var(--text2);
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+
+  .cert-info p { font-size: 0.82rem; color: var(--text2); }
+
+  .level-pill {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-family: 'Share Tech Mono', monospace;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+  }
+
+  .level-entry { background: rgba(0,255,157,0.1); color: var(--green); border: 1px solid rgba(0,255,157,0.3); }
+  .level-mid { background: rgba(255,215,0,0.1); color: var(--yellow); border: 1px solid rgba(255,215,0,0.3); }
+  .level-adv { background: rgba(255,56,96,0.1); color: var(--red); border: 1px solid rgba(255,56,96,0.3); }
+
+  /* QUIZ */
+  #quiz {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem;
+  }
+
+  .quiz-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .quiz-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .quiz-tab {
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .quiz-tab.active {
+    background: var(--green);
+    color: #000;
+    border-color: var(--green);
+  }
+
+  .quiz-tab:hover:not(.active) {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .quiz-panel { display: none; }
+  .quiz-panel.active { display: block; }
+
+  .question-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .q-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--green);
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+  }
+
+  .q-text {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .option {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text);
+    background: var(--bg3);
+    transition: all 0.2s;
+    font-family: 'Exo 2', sans-serif;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .option:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,229,255,0.05); }
+
+  .option.correct { border-color: var(--green); background: rgba(0,255,157,0.08); color: var(--green); }
+  .option.wrong { border-color: var(--red); background: rgba(255,56,96,0.08); color: var(--red); }
+  .option.disabled { pointer-events: none; opacity: 0.6; }
+
+  .opt-letter {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    width: 22px;
+    height: 22px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .explain {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(0,255,157,0.05);
+    border-left: 3px solid var(--green);
+    font-size: 0.83rem;
+    color: var(--text2);
+    border-radius: 0 4px 4px 0;
+    display: none;
+  }
+
+  .explain.show { display: block; }
+
+  .quiz-score {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .score-display {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.4rem;
+    color: var(--green);
+    text-shadow: var(--glow);
+  }
+
+  .score-label { font-size: 0.78rem; color: var(--text2); letter-spacing: 1px; }
+
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* NEWS */
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem; }
+
+  .news-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .news-card:hover {
+    border-color: rgba(0,255,157,0.3);
+    background: var(--panel2);
+    transform: translateY(-2px);
+  }
+
+  .news-category {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    opacity: 0.8;
+  }
+
+  .news-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+  }
+
+  .news-excerpt { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+
+  .news-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text2);
+    letter-spacing: 1px;
+    opacity: 0.6;
+    margin-top: auto;
+  }
+
+  /* BREACH TABLE */
+  .breach-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+  }
+
+  thead tr {
+    background: var(--panel2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+
+  td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(26,48,69,0.6);
+    font-size: 0.88rem;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover { background: var(--panel2); }
+
+  .severity {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  .sev-critical { background: rgba(255,56,96,0.15); color: var(--red); border: 1px solid rgba(255,56,96,0.3); }
+  .sev-high { background: rgba(255,140,0,0.15); color: var(--orange); border: 1px solid rgba(255,140,0,0.3); }
+  .sev-med { background: rgba(255,215,0,0.15); color: var(--yellow); border: 1px solid rgba(255,215,0,0.3); }
+
+  /* CASE STUDIES */
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); gap: 1.75rem; }
+
+  .case-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .case-card:hover {
+    border-color: rgba(0,255,157,0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+  }
+
+  .case-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel2);
+  }
+
+  .case-year {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--red);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .case-name {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
+  }
+
+  .case-type {
+    font-size: 0.78rem;
+    color: var(--text2);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .case-body { padding: 1.5rem; }
+
+  .case-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-stat {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+  .case-stat-val {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    color: var(--red);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .case-stat-lbl {
+    font-size: 0.65rem;
+    color: var(--text2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .case-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; margin-bottom: 1rem; }
+
+  .case-lessons h4 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .case-lessons ul { list-style: none; }
+
+  .case-lessons li {
+    font-size: 0.82rem;
+    color: var(--text2);
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .case-lessons li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--green);
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-bottom: 0.75rem;
+    text-shadow: var(--glow);
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--text2);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ANIMATIONS */
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .blink { animation: blink 1s step-end infinite; }
+
+  @keyframes glitch {
+    0%,100%{transform:translateX(0)}
+    10%{transform:translateX(-2px)}
+    20%{transform:translateX(2px)}
+    30%{transform:translateX(-1px)}
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.6s ease forwards; }
+
+  /* TERMINAL CURSOR */
+  .cursor-blink::after {
+    content: '_';
+    color: var(--green);
+    animation: blink 1s step-end infinite;
+  }
+
+  /* GLOW LINE */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green), var(--cyan), transparent);
+    margin: 0;
+    opacity: 0.4;
+  }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .case-grid { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .case-stat-row { grid-template-columns: repeat(2, 1fr); }
+    .stats-bar { gap: 2rem; }
+  }
+
+  /* ===== CHATBOT ===== */
+#chat-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9000; /* below scanline overlay (9999) but above everything else */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--green);
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  box-shadow: 0 0 25px rgba(0,255,157,0.5);
+  transition: all 0.3s;
+}
+#chat-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(0,255,157,0.8);
+}
+
+#chat-window {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  z-index: 9000;
+  width: 360px;
+  max-height: 520px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  display: none; /* hidden by default */
+}
+
+#chat-header {
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: var(--green);
+}
+
+#chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+}
+
+.chat-msg {
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  max-width: 85%;
+  line-height: 1.5;
+}
+
+.chat-msg.bot {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  align-self: flex-start;
+}
+
+.chat-msg.user {
+  background: rgba(0,255,157,0.12);
+  border: 1px solid rgba(0,255,157,0.25);
+  color: var(--green);
+  align-self: flex-end;
+}
+
+#chat-input-row {
+  display: flex;
+  border-top: 1px solid var(--border);
+}
+
+#chat-input {
+  flex: 1;
+  background: var(--bg3);
+  border: none;
+  padding: 0.75rem 1rem;
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+#chat-send {
+  background: var(--green);
+  border: none;
+  padding: 0 1.2rem;
+  color: #000;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+
+#chat-send:hover { background: var(--cyan); }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">CYBER<span>PATH</span></div>
+  <ul class="nav-links">
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#breaches">Breaches</a></li>
+    <li><a href="#casestudies">Case Studies</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-content fade-up">
+    <div class="hero-tag">INITIALIZE LEARNING SEQUENCE</div>
+    <h1>Master the Art of<br><span class="accent">Cyber</span><span class="accent2">security</span></h1>
+    <p class="hero-sub">From zero to defender. Navigate the complete cybersecurity career path, earn top certifications, sharpen your skills with CTF challenges, and stay ahead of evolving threats.</p>
+    <div class="btn-row">
+      <a href="#roadmap" class="btn btn-primary">Start Your Path</a>
+      <a href="#quiz" class="btn btn-outline">Take a Quiz</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">3.5M+</span>
+    <span class="stat-label">Unfilled Cyber Jobs</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">$4.44M</span>
+    <span class="stat-label">Avg. Breach Cost</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">3,332</span>
+    <span class="stat-label">Breaches in 2025</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">16B+</span>
+    <span class="stat-label">Credentials Leaked '25</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">$150K+</span>
+    <span class="stat-label">CISSP Avg Salary</span>
+  </div>
+</div>
+
+<div class="glow-line"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-header">
+    <div class="section-tag">// PHASE 01</div>
+    <h2>The Cybersecurity <span class="hl">Learning Roadmap</span></h2>
+    <p class="section-desc">A structured journey from foundational IT knowledge to elite offensive and defensive security expertise.</p>
+  </div>
+
+  <div class="roadmap">
+    <div class="road-item">
+      <div class="road-dot">01</div>
+      <div class="road-content">
+        <div class="road-level">FOUNDATION — 0–3 MONTHS</div>
+        <div class="road-title">IT & Networking Fundamentals</div>
+        <p style="color:var(--text2);font-size:0.88rem;">Build the bedrock before touching security. Understand how systems communicate, how data moves, and how networks are structured. This is the prerequisite everything else sits on.</p>
+        <div class="road-skills">
+          <span class="tag">OSI Model</span>
+          <span class="tag">TCP/IP</span>
+          <span class="tag">DNS / DHCP</span>
+          <span class="tag">Linux Basics</span>
+          <span class="tag">Windows Admin</span>
+          <span class="tag">Python Scripting</span>
+          <span class="tag">CompTIA A+</span>
+          <span class="tag">Network+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="road-item cyan">
+      <div class="road-dot">02</div>
+      <div class="road-content">
+        <div class="road-level">ENTRY SECURITY — 3–8 MONTHS</div>
+        <div class="road-title">Security Fundamentals & Blue Team</div>
+        <p style="color:var(--text2);font-size:0.88rem;">Learn the defender's perspective. Understand threats, vulnerabilities, and the tools used to protect systems. Study cryptography, IAM, and incident response workflows.</p>
+        <div class="road-skills">
+          <span class="tag cyan">CompTIA Security+</span>
+          <span class="tag cyan">Firewalls</span>
+          <span class="tag cyan">SIEM Tools</span>
+          <span class="tag cyan">Threat Intelligence</span>
+          <span class="tag cyan">IAM</span>
+          <span class="tag cyan">Cryptography</span>
+          <span class="tag cyan">Risk Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="road-item">
+      <div class="road-dot">03</div>
+      <div class="road-content">
+        <div class="road-level">INTERMEDIATE — 6–18 MONTHS</div>
+        <div class="road-title">SOC Analyst & Threat Detection</div>
+        <p style="color:var(--text2);font-size:0.88rem;">Work in a Security Operations Center environment. Monitor alerts, triage incidents, analyze logs, perform digital forensics, and respond to real-time threats. Hands-on lab time is critical.</p>
+        <div class="road-skills">
+          <span class="tag">CySA+</span>
+          <span class="tag">Splunk</span>
+          <span class="tag">ELK Stack</span>
+          <span class="tag">MITRE ATT&CK</span>
+          <span class="tag">DFIR</span>
+          <span class="tag">TryHackMe</span>
+          <span class="tag">Blue Team Labs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="road-item purple">
+      <div class="road-dot">04</div>
+      <div class="road-content">
+        <div class="road-level">SPECIALIZATION — 1–3 YEARS</div>
+        <div class="road-title">Offensive Security / Penetration Testing</div>
+        <p style="color:var(--text2);font-size:0.88rem;">Learn to think like an attacker. Conduct ethical hacking engagements, exploit vulnerabilities, perform web app testing, and write professional pentest reports.</p>
+        <div class="road-skills">
+          <span class="tag purple">OSCP</span>
+          <span class="tag purple">CEH</span>
+          <span class="tag purple">PenTest+</span>
+          <span class="tag purple">Metasploit</span>
+          <span class="tag purple">Burp Suite</span>
+          <span class="tag purple">OWASP Top 10</span>
+          <span class="tag purple">Hack The Box</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="road-item orange">
+      <div class="road-dot">05</div>
+      <div class="road-content">
+        <div class="road-level">ADVANCED — 2–4 YEARS</div>
+        <div class="road-title">Cloud Security & Architecture</div>
+        <p style="color:var(--text2);font-size:0.88rem;">Secure cloud-native infrastructure across AWS, Azure, and GCP. Understand cloud-specific threats, zero-trust architecture, DevSecOps pipelines, and container security.</p>
+        <div class="road-skills">
+          <span class="tag orange">AWS Security Specialty</span>
+          <span class="tag orange">AZ-500</span>
+          <span class="tag orange">CCSP</span>
+          <span class="tag orange">Kubernetes Security</span>
+          <span class="tag orange">DevSecOps</span>
+          <span class="tag orange">Zero Trust</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="road-item red">
+      <div class="road-dot">06</div>
+      <div class="road-content">
+        <div class="road-level">EXPERT / LEADERSHIP — 5+ YEARS</div>
+        <div class="road-title">CISO / Security Architect / Governance</div>
+        <p style="color:var(--text2);font-size:0.88rem;">Lead enterprise security programs. Design security architectures, manage risk at scale, oversee GRC frameworks, and drive executive-level security strategy.</p>
+        <div class="road-skills">
+          <span class="tag red">CISSP</span>
+          <span class="tag red">CISM</span>
+          <span class="tag red">CRISC</span>
+          <span class="tag red">CASP+</span>
+          <span class="tag red">C|CISO</span>
+          <span class="tag red">ISO 27001 Lead</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTF SECTION -->
+<section id="ctf">
+  <div class="section-header">
+    <div class="section-tag">// PHASE 02</div>
+    <h2>Capture The <span class="hl2">Flag</span> — Getting Started</h2>
+    <p class="section-desc">CTFs are the best way to practice real hacking skills in a legal, structured environment. These platforms will sharpen your abilities fast.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-icon">🏁</span>
+      <div class="card-title">TryHackMe</div>
+      <div class="card-sub">BEGINNER → INTERMEDIATE</div>
+      <p>Guided, browser-based labs with structured learning paths. Perfect for beginners — no prior experience required. Over 500 rooms covering every domain of cybersecurity.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">📦</span>
+      <div class="card-title">Hack The Box</div>
+      <div class="card-sub">INTERMEDIATE → ADVANCED</div>
+      <p>Industry-standard platform used by professionals and for OSCP preparation. Realistic machines, Active Directory labs, and enterprise-grade challenges.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌐</span>
+      <div class="card-title">PicoCTF</div>
+      <div class="card-sub">BEGINNER FRIENDLY</div>
+      <p>Carnegie Mellon's free CTF platform designed for students. Covers binary exploitation, web, crypto, forensics, and reverse engineering with hints and walkthroughs.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔓</span>
+      <div class="card-title">OverTheWire</div>
+      <div class="card-sub">LINUX & BASICS</div>
+      <p>Wargames focused on Linux command-line skills, privilege escalation, and fundamental exploitation techniques. Start with Bandit — it's a rite of passage.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🕸️</span>
+      <div class="card-title">OWASP WebGoat</div>
+      <div class="card-sub">WEB SECURITY</div>
+      <p>Deliberately insecure web application for learning OWASP Top 10 vulnerabilities. Practice SQL injection, XSS, CSRF, and broken authentication in a safe environment.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚔️</span>
+      <div class="card-title">CTFtime.org</div>
+      <div class="card-sub">COMPETITION TRACKER</div>
+      <p>The global calendar for upcoming CTF competitions. Team up with others, join live events, and track your global ranking across hundreds of annual competitions.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header">
+    <div class="section-tag">// PHASE 03</div>
+    <h2>Top <span class="hl">Certifications</span> for 2026</h2>
+    <p class="section-desc">Industry-recognized credentials that validate your skills and significantly boost your earning potential and career opportunities.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(0,255,157,0.1);">🛡️</div>
+      <div class="cert-info">
+        <div class="cert-name">CompTIA Security+</div>
+        <div class="cert-org">COMPTIA · SY0-701</div>
+        <p>The most recognized entry-level cert — appears in ~70% of job postings. DoD 8140 approved. Covers threats, cryptography, identity, and risk management.</p>
+        <span class="level-pill level-entry">ENTRY LEVEL</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(0,229,255,0.1);">🏆</div>
+      <div class="cert-info">
+        <div class="cert-name">CISSP</div>
+        <div class="cert-org">ISC² · GOLD STANDARD</div>
+        <p>The most respected advanced certification in cybersecurity. Requires 5 years experience across 8 security domains. Average salary exceeds $150,000.</p>
+        <span class="level-pill level-adv">ADVANCED</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(255,56,96,0.1);">💀</div>
+      <div class="cert-info">
+        <div class="cert-name">OSCP</div>
+        <div class="cert-org">OFFENSIVE SECURITY</div>
+        <p>The gold standard for penetration testers. Purely hands-on exam — 24-hour live attack lab. Required for most senior red team and pentesting roles.</p>
+        <span class="level-pill level-adv">EXPERT</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(255,215,0,0.1);">📊</div>
+      <div class="cert-info">
+        <div class="cert-name">CISM</div>
+        <div class="cert-org">ISACA · MANAGEMENT</div>
+        <p>Top credential for security managers and governance professionals. Covers risk management, incident management, and security program development. Ideal for CISO track.</p>
+        <span class="level-pill level-mid">MANAGEMENT</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(0,229,255,0.1);">🔍</div>
+      <div class="cert-info">
+        <div class="cert-name">CompTIA CySA+</div>
+        <div class="cert-org">COMPTIA · SOC ANALYST</div>
+        <p>Validates threat detection, analysis, and response skills for SOC analyst roles. The ideal next step after Security+ for blue-teamers targeting defensive roles.</p>
+        <span class="level-pill level-mid">INTERMEDIATE</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(180,79,255,0.1);">☁️</div>
+      <div class="cert-info">
+        <div class="cert-name">CCSP</div>
+        <div class="cert-org">ISC² · CLOUD SECURITY</div>
+        <p>The leading cloud security certification. Validates architecture, design, operations, and compliance knowledge for cloud environments across all major providers.</p>
+        <span class="level-pill level-adv">ADVANCED</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(255,140,0,0.1);">🎯</div>
+      <div class="cert-info">
+        <div class="cert-name">CEH</div>
+        <div class="cert-org">EC-COUNCIL · ETHICAL HACKING</div>
+        <p>Certified Ethical Hacker covers 20 attack domains including malware analysis, session hijacking, IoT hacking, and cloud attacks from an attacker's perspective.</p>
+        <span class="level-pill level-mid">INTERMEDIATE</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(0,255,157,0.1);">⚠️</div>
+      <div class="cert-info">
+        <div class="cert-name">CRISC</div>
+        <div class="cert-org">ISACA · RISK CONTROL</div>
+        <p>Certified in Risk and Information Systems Control. Top credential for IT risk professionals managing enterprise risk, compliance, and governance frameworks.</p>
+        <span class="level-pill level-adv">ADVANCED</span>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge" style="background:rgba(0,229,255,0.1);">🖥️</div>
+      <div class="cert-info">
+        <div class="cert-name">CASP+</div>
+        <div class="cert-org">COMPTIA · ARCHITECTURE</div>
+        <p>Advanced-level vendor-neutral cert for security architects and engineers. Covers hybrid, cloud, on-premises, and mobile infrastructure security design and engineering.</p>
+        <span class="level-pill level-adv">ADVANCED</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- QUIZ -->
+<div id="quiz">
+  <div class="quiz-wrapper">
+    <div class="section-header">
+      <div class="section-tag">// PHASE 04</div>
+      <h2>Test Your <span class="hl">Knowledge</span></h2>
+      <p class="section-desc">Challenge yourself with quizzes on cybercrime, CTF skills, and security fundamentals. Select your category below.</p>
+    </div>
+
+    <div class="quiz-tabs">
+      <button class="quiz-tab active" onclick="switchQuiz('cybercrime')">Cybercrime</button>
+      <button class="quiz-tab" onclick="switchQuiz('ctf')">CTF Techniques</button>
+      <button class="quiz-tab" onclick="switchQuiz('defense')">Defense & Blue Team</button>
+    </div>
+
+    <!-- CYBERCRIME QUIZ -->
+    <div class="quiz-panel active" id="q-cybercrime">
+      <div id="q-cybercrime-questions"></div>
+      <div class="quiz-score">
+        <div>
+          <div class="score-display" id="score-cybercrime">0 / 0</div>
+          <div class="score-label">SCORE · CYBERCRIME MODULE</div>
+        </div>
+        <button class="reset-btn" onclick="resetQuiz('cybercrime')">↺ RESET</button>
+      </div>
+    </div>
+
+    <!-- CTF QUIZ -->
+    <div class="quiz-panel" id="q-ctf">
+      <div id="q-ctf-questions"></div>
+      <div class="quiz-score">
+        <div>
+          <div class="score-display" id="score-ctf">0 / 0</div>
+          <div class="score-label">SCORE · CTF MODULE</div>
+        </div>
+        <button class="reset-btn" onclick="resetQuiz('ctf')">↺ RESET</button>
+      </div>
+    </div>
+
+    <!-- DEFENSE QUIZ -->
+    <div class="quiz-panel" id="q-defense">
+      <div id="q-defense-questions"></div>
+      <div class="quiz-score">
+        <div>
+          <div class="score-display" id="score-defense">0 / 0</div>
+          <div class="score-label">SCORE · DEFENSE MODULE</div>
+        </div>
+        <button class="reset-btn" onclick="resetQuiz('defense')">↺ RESET</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-header">
+    <div class="section-tag">// INTEL FEED</div>
+    <h2>Cybersecurity <span class="hl2">News</span> — 2026</h2>
+    <p class="section-desc">Stay current with the most critical developments in the threat landscape, policies, and defensive technologies.</p>
+  </div>
+
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-category">🔴 THREAT INTEL</div>
+      <div class="news-title">16 Billion Credentials Leaked in Largest Dump Ever — Google, Apple & Facebook Among Sources</div>
+      <div class="news-excerpt">The 2025 credential compilation exposed over 16 billion username/password pairs harvested by infostealer malware, aggregating data from thousands of prior breaches. Credential stuffing risk is at an all-time high.</div>
+      <div class="news-meta">2025 · INFOSTEALER MALWARE · CRITICAL</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">⚠️ DATA BREACH</div>
+      <div class="news-title">Odido Breach Exposes 6.2 Million Customers — Names, IBANs, Passport Data at Risk</div>
+      <div class="news-excerpt">Dutch telecom provider Odido suffered unauthorized access to its customer contact system over a weekend in February 2026. Attackers downloaded data including addresses, mobile numbers, IBANs, and dates of birth.</div>
+      <div class="news-meta">FEB 2026 · TELECOM SECTOR · HIGH</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">📈 INDUSTRY</div>
+      <div class="news-title">US Data Breaches Hit Record 3,332 in 2025 — 4% Rise From Previous Record</div>
+      <div class="news-excerpt">The Identity Theft Resource Center reports 2025 saw the third consecutive year with over 3,000 data compromises — a 79% surge in five years. Cyberattacks now account for 80% of all incidents.</div>
+      <div class="news-meta">2026 · ITRC REPORT · STATISTICS</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">☁️ CLOUD SECURITY</div>
+      <div class="news-title">Salesforce Misconfigurations Fuel Wave of 2025 Breaches — Qantas, TransUnion, Farmers Insurance Hit</div>
+      <div class="news-excerpt">Unsecured third-party Salesforce integrations were the common thread linking multiple major 2025 breaches. API permission misconfigurations allowed attackers to silently exfiltrate millions of sensitive records.</div>
+      <div class="news-meta">2025–2026 · API SECURITY · CRITICAL</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">🤖 AI THREATS</div>
+      <div class="news-title">Agentic AI Emerges as the 2026 Threat Multiplier — Attackers Automate Multi-Stage Campaigns</div>
+      <div class="news-excerpt">Security firms warn that AI agents are enabling attackers to orchestrate complex, multi-stage intrusions with minimal human involvement. Phishing, vulnerability scanning, and lateral movement are all being automated at scale.</div>
+      <div class="news-meta">2026 · AI SECURITY · EMERGING</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">🏥 HEALTHCARE</div>
+      <div class="news-title">Yale New Haven Health Breach Impacts 5.6M Patients — $18M Settlement Reached</div>
+      <div class="news-excerpt">One of 2025's largest healthcare incidents exposed the personal data of approximately 5.6 million patients. The resulting $18M settlement underscores mounting legal exposure for organizations failing to protect health data.</div>
+      <div class="news-meta">2025 · HEALTHCARE · HIGH IMPACT</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">🔐 POLICY</div>
+      <div class="news-title">Supply Chain Breaches Nearly Double in 2025 — Now Account for 30% of All Third-Party Incidents</div>
+      <div class="news-excerpt">ITRC data shows affected entities in supply chain attacks jumped from 660 to 1,251 in a single year. Experts are calling for mandatory third-party risk assessments and zero-trust vendor access frameworks.</div>
+      <div class="news-meta">2026 · SUPPLY CHAIN · SYSTEMIC</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">💰 RANSOMWARE</div>
+      <div class="news-title">BridgePay Ransomware Attack Disrupts City Government Payments Across Multiple States</div>
+      <div class="news-excerpt">BridgePay's ransomware incident disrupted financial operations for city governments it serves, highlighting critical infrastructure dependencies on fintech payment platforms. Full infrastructure was restored within weeks.</div>
+      <div class="news-meta">FEB 2026 · RANSOMWARE · INFRASTRUCTURE</div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-category">🛡️ DEFENSE</div>
+      <div class="news-title">Zero Trust Architecture Becomes Baseline Standard — Not Best Practice — for Enterprise Security</div>
+      <div class="news-excerpt">Following a collapse of traditional perimeter security in 2025, analysts now classify Zero Trust not as an advanced strategy but as the new baseline. Continuous verification and least-privilege access are now table stakes.</div>
+      <div class="news-meta">2026 · ZERO TRUST · FRAMEWORK</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BREACHES TABLE -->
+<section id="breaches">
+  <div class="section-header">
+    <div class="section-tag">// BREACH LOG</div>
+    <h2>Top <span class="hl">Data Breaches</span> — 2025 / 2026</h2>
+    <p class="section-desc">The most significant security incidents that shaped the modern threat landscape and defined new attack vectors.</p>
+  </div>
+
+  <div class="breach-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Organization</th>
+          <th>Date</th>
+          <th>Scale</th>
+          <th>Attack Vector</th>
+          <th>Severity</th>
+          <th>Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Global Credential Compilation</strong><br><span style="font-size:0.75rem;color:var(--text2)">Google, Apple, Facebook</span></td>
+          <td>2025</td>
+          <td>16B+ credentials</td>
+          <td>Infostealer malware</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>Credential stuffing, account takeover at global scale</td>
+        </tr>
+        <tr>
+          <td><strong>Odido (Netherlands)</strong><br><span style="font-size:0.75rem;color:var(--text2)">Telecom provider</span></td>
+          <td>Feb 2026</td>
+          <td>6.2M customers</td>
+          <td>Unauthorized system access</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>Names, IBANs, passport details, addresses exposed</td>
+        </tr>
+        <tr>
+          <td><strong>Yale New Haven Health</strong><br><span style="font-size:0.75rem;color:var(--text2)">Healthcare system</span></td>
+          <td>2025</td>
+          <td>5.6M patients</td>
+          <td>Data security incident</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>$18M settlement; PHI exposed across multiple departments</td>
+        </tr>
+        <tr>
+          <td><strong>Qantas Airways</strong><br><span style="font-size:0.75rem;color:var(--text2)">Australian airline</span></td>
+          <td>Jun 2025</td>
+          <td>6M customers</td>
+          <td>Salesforce third-party exploit</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>PII, frequent flyer data; Scattered Lapsus$ claimed responsibility</td>
+        </tr>
+        <tr>
+          <td><strong>TransUnion</strong><br><span style="font-size:0.75rem;color:var(--text2)">Credit reporting agency</span></td>
+          <td>Jul 2025</td>
+          <td>4.4M customers</td>
+          <td>Salesforce API misconfiguration</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>SSNs, credit data; ShinyHunters group attributed</td>
+        </tr>
+        <tr>
+          <td><strong>Conduent Business Services</strong><br><span style="font-size:0.75rem;color:var(--text2)">Business process outsourcing</span></td>
+          <td>Oct 2024–Jan 2025</td>
+          <td>4.3M+ individuals</td>
+          <td>Ransomware / 8TB exfiltrated</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>SSNs, DOB, health insurance; cascading vendor breaches</td>
+        </tr>
+        <tr>
+          <td><strong>Volvo Group North America</strong><br><span style="font-size:0.75rem;color:var(--text2)">Via Conduent (indirect)</span></td>
+          <td>Feb 2026</td>
+          <td>~17,000 people</td>
+          <td>Third-party vendor breach</td>
+          <td><span class="severity sev-high">HIGH</span></td>
+          <td>Full names, SSNs, DOB, health insurance details</td>
+        </tr>
+        <tr>
+          <td><strong>Coinbase (Insider)</strong><br><span style="font-size:0.75rem;color:var(--text2)">Cryptocurrency exchange</span></td>
+          <td>Dec 2025</td>
+          <td>~30 users</td>
+          <td>Malicious insider / contractor</td>
+          <td><span class="severity sev-med">MEDIUM</span></td>
+          <td>KYC data, wallet balances; targeted phishing risk</td>
+        </tr>
+        <tr>
+          <td><strong>Farmers Insurance</strong><br><span style="font-size:0.75rem;color:var(--text2)">Insurance provider</span></td>
+          <td>2025</td>
+          <td>1.1M policyholders</td>
+          <td>Vendor API credential exploit</td>
+          <td><span class="severity sev-high">HIGH</span></td>
+          <td>PII, policy data; third-party Salesforce integration attacked</td>
+        </tr>
+        <tr>
+          <td><strong>Marquis Health</strong><br><span style="font-size:0.75rem;color:var(--text2)">Healthcare / SonicWall</span></td>
+          <td>2025</td>
+          <td>780,000 patients</td>
+          <td>Cloud backup API breach (SonicWall)</td>
+          <td><span class="severity sev-critical">CRITICAL</span></td>
+          <td>SSNs, credit card numbers, medical data; lawsuit filed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CASE STUDIES -->
+<section id="casestudies">
+  <div class="section-header">
+    <div class="section-tag">// INCIDENT ANALYSIS</div>
+    <h2>Cybersecurity <span class="hl">Case Studies</span></h2>
+    <p class="section-desc">Deep-dive forensic analysis of landmark cyberattacks — their execution, impact, and the lessons every security professional must learn.</p>
+  </div>
+
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-year">2017 · RANSOMWARE WORM</div>
+        <div class="case-name">WannaCry</div>
+        <div class="case-type">NSA EXPLOIT · ETERNAL BLUE · NORTH KOREA APT</div>
+      </div>
+      <div class="case-body">
+        <div class="case-stat-row">
+          <div class="case-stat">
+            <span class="case-stat-val">200K+</span>
+            <span class="case-stat-lbl">Systems Hit</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">150</span>
+            <span class="case-stat-lbl">Countries</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">$4B+</span>
+            <span class="case-stat-lbl">Estimated Cost</span>
+          </div>
+        </div>
+        <p class="case-desc">WannaCry exploited the EternalBlue vulnerability — stolen from the NSA — in unpatched Windows SMB services. The ransomware encrypted files globally within hours, crippling the UK's NHS, Telefónica, FedEx, and hundreds of organizations. A "kill switch" domain, registered by researcher Marcus Hutchins, halted propagation.</p>
+        <div class="case-lessons">
+          <h4>⚡ Key Lessons</h4>
+          <ul>
+            <li>Patch management is non-negotiable — MS17-010 patch had been available for months</li>
+            <li>Disable SMBv1 on all enterprise systems</li>
+            <li>Network segmentation limits lateral movement of worms</li>
+            <li>Offline backups are the only reliable ransomware defense</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-year">2020 · SUPPLY CHAIN APT</div>
+        <div class="case-name">SolarWinds SUNBURST</div>
+        <div class="case-type">COZY BEAR · NATION-STATE · ADVANCED PERSISTENT THREAT</div>
+      </div>
+      <div class="case-body">
+        <div class="case-stat-row">
+          <div class="case-stat">
+            <span class="case-stat-val">18,000+</span>
+            <span class="case-stat-lbl">Orgs Infected</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">9 months</span>
+            <span class="case-stat-lbl">Undetected</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">100+</span>
+            <span class="case-stat-lbl">Govt Agencies</span>
+          </div>
+        </div>
+        <p class="case-desc">Russian SVR hackers (Cozy Bear) injected backdoor code into SolarWinds' Orion software build pipeline. The trojanized update was signed and distributed to 18,000+ organizations, including the US Treasury, State Department, and CISA. The attack remained undetected for nine months — only discovered when FireEye noticed their own red team tools were stolen.</p>
+        <div class="case-lessons">
+          <h4>⚡ Key Lessons</h4>
+          <ul>
+            <li>Software supply chain is a critical, often overlooked attack surface</li>
+            <li>Code signing does not guarantee code integrity if the build pipeline is compromised</li>
+            <li>Zero-trust architecture limits blast radius of trusted software</li>
+            <li>Behavioral anomaly detection can catch what signature-based tools miss</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-year">2021 · CRITICAL INFRASTRUCTURE</div>
+        <div class="case-name">Colonial Pipeline Ransomware</div>
+        <div class="case-type">DARKSIDE · RaaS · ENERGY SECTOR</div>
+      </div>
+      <div class="case-body">
+        <div class="case-stat-row">
+          <div class="case-stat">
+            <span class="case-stat-val">$4.4M</span>
+            <span class="case-stat-lbl">Ransom Paid</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">6 days</span>
+            <span class="case-stat-lbl">Shutdown</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">17 States</span>
+            <span class="case-stat-lbl">Fuel Shortage</span>
+          </div>
+        </div>
+        <p class="case-desc">DarkSide ransomware-as-a-service operators gained access to Colonial Pipeline's network via a compromised VPN account with no MFA. The company proactively shut down pipeline operations, causing fuel shortages across the US East Coast. President Biden declared a state of emergency. The FBI later recovered $2.3M of the Bitcoin ransom.</p>
+        <div class="case-lessons">
+          <h4>⚡ Key Lessons</h4>
+          <ul>
+            <li>MFA on all remote access systems is essential — this breach used leaked credentials with no MFA</li>
+            <li>IT/OT network separation is critical for operational technology</li>
+            <li>Ransomware payments may be partially recoverable but invite future attacks</li>
+            <li>Critical infrastructure requires federal-level incident response planning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-year">2013–2014 · MEGA BREACH</div>
+        <div class="case-name">Yahoo! Data Breach</div>
+        <div class="case-type">NATION-STATE HACKERS · RECORD-SETTING SCALE</div>
+      </div>
+      <div class="case-body">
+        <div class="case-stat-row">
+          <div class="case-stat">
+            <span class="case-stat-val">3 Billion</span>
+            <span class="case-stat-lbl">Accounts</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">$350M</span>
+            <span class="case-stat-lbl">Deal Reduction</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">~4 years</span>
+            <span class="case-stat-lbl">To Disclose</span>
+          </div>
+        </div>
+        <p class="case-desc">Yahoo suffered the largest data breach in history — all 3 billion user accounts were compromised. Attackers accessed names, email addresses, telephone numbers, dates of birth, hashed passwords, and security questions. The breach went undisclosed for years, reducing Verizon's acquisition price by $350M and resulting in a $117.5M class-action settlement.</p>
+        <div class="case-lessons">
+          <h4>⚡ Key Lessons</h4>
+          <ul>
+            <li>MD5 password hashing is dangerously weak — use bcrypt, Argon2, or scrypt</li>
+            <li>Delayed breach disclosure dramatically amplifies user harm</li>
+            <li>Security questions are fundamentally insecure for account recovery</li>
+            <li>M&A due diligence must include rigorous cybersecurity audits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-year">2023 · SOCIAL ENGINEERING</div>
+        <div class="case-name">MGM Resorts Cyber Attack</div>
+        <div class="case-type">SCATTERED SPIDER · ALPHV / BLACKCAT · VISHING</div>
+      </div>
+      <div class="case-body">
+        <div class="case-stat-row">
+          <div class="case-stat">
+            <span class="case-stat-val">$100M+</span>
+            <span class="case-stat-lbl">Lost Revenue</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">10 days</span>
+            <span class="case-stat-lbl">Disruption</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">6M+</span>
+            <span class="case-stat-lbl">Records Exposed</span>
+          </div>
+        </div>
+        <p class="case-desc">Scattered Spider used a 10-minute phone call to MGM's IT helpdesk to impersonate an employee and gain admin access. The group then deployed ALPHV ransomware across MGM's systems, taking slot machines, digital keys, and reservation systems offline for nearly two weeks. Caesars Entertainment, also targeted, paid a $15M ransom quietly.</p>
+        <div class="case-lessons">
+          <h4>⚡ Key Lessons</h4>
+          <ul>
+            <li>Social engineering bypasses all technical controls — humans are the weakest link</li>
+            <li>Strict identity verification protocols must be enforced for IT helpdesk escalations</li>
+            <li>Okta / SSO compromise can cascade across the entire organization</li>
+            <li>Incident response decisions made under pressure need pre-planned playbooks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-year">2021 · WEB APP VULNERABILITY</div>
+        <div class="case-name">Log4Shell (CVE-2021-44228)</div>
+        <div class="case-type">CRITICAL RCE · LOG4J · ZERO-DAY · GLOBAL IMPACT</div>
+      </div>
+      <div class="case-body">
+        <div class="case-stat-row">
+          <div class="case-stat">
+            <span class="case-stat-val">CVSS 10.0</span>
+            <span class="case-stat-lbl">Max Severity</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">Billions</span>
+            <span class="case-stat-lbl">Systems at Risk</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val">~72 hrs</span>
+            <span class="case-stat-lbl">Exploit in Wild</span>
+          </div>
+        </div>
+        <p class="case-desc">A critical zero-day vulnerability in the ubiquitous Apache Log4j logging library enabled unauthenticated remote code execution via a single crafted log message. Because Log4j was embedded in millions of products — from enterprise software to cloud services — the blast radius was unprecedented. Exploitation began within 72 hours of disclosure.</p>
+        <div class="case-lessons">
+          <h4>⚡ Key Lessons</h4>
+          <ul>
+            <li>Open-source dependency management is a critical security function — know your SBOM</li>
+            <li>Logging libraries are high-value targets because they process untrusted input</li>
+            <li>Vulnerability scanning must extend to transitive dependencies, not just direct</li>
+            <li>Network egress filtering can limit JNDI callback exploitation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">[ CYBERPATH ]</div>
+  <p>A comprehensive cybersecurity learning resource. Stay curious, stay secure. All breach data sourced from ITRC, IBM Cost of Data Breach Report 2025, and public disclosures. Updated March 2026.</p>
+  <p style="margin-top:1rem;font-size:0.72rem;opacity:0.4;">FOR EDUCATIONAL PURPOSES ONLY · ETHICAL HACKING ONLY · ALWAYS OBTAIN AUTHORIZATION</p>
+</footer>
+
+<!-- ===== CHATBOT WIDGET ===== -->
+<button id="chat-toggle" title="Ask CyberBot">🤖</button>
+
+<div id="chat-window">
+  <div id="chat-header">
+    <span>⚡ CYBERBOT</span>
+    <button onclick="toggleChat()" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.1rem;">✕</button>
+  </div>
+  <div id="chat-messages">
+    <div class="chat-msg bot">Hello! I'm CyberBot 🤖 Ask me anything about cybersecurity — careers, tools, certifications, or concepts.</div>
+  </div>
+  <div id="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Ask about cybersecurity..." />
+    <button id="chat-send">SEND</button>
+  </div>
+</div>
+
+<script>
+const quizData = {
+  cybercrime: [
+    {
+      q: "What type of attack encrypts victim files and demands payment for the decryption key?",
+      opts: ["Phishing", "Ransomware", "Rootkit", "Spyware"],
+      correct: 1,
+      explain: "Ransomware encrypts victims' files and demands a ransom — usually in cryptocurrency — in exchange for the decryption key. WannaCry and Colonial Pipeline are landmark examples."
+    },
+    {
+      q: "Which technique did Scattered Spider use to breach MGM Resorts in 2023?",
+      opts: ["Zero-day exploit", "Brute-force attack", "Vishing (voice phishing) via IT helpdesk", "SQL injection"],
+      correct: 2,
+      explain: "Scattered Spider made a 10-minute phone call impersonating an MGM employee to the IT helpdesk, gaining admin credentials — a classic vishing / social engineering attack."
+    },
+    {
+      q: "What is a 'zero-day vulnerability'?",
+      opts: [
+        "A bug that takes zero days to fix",
+        "A vulnerability unknown to the vendor with no patch available",
+        "An attack that happens at midnight",
+        "A flaw in day-zero (initial) software releases only"
+      ],
+      correct: 1,
+      explain: "A zero-day is a vulnerability that is unknown to the software vendor, meaning there are zero days of protection — no patch exists when attackers exploit it."
+    },
+    {
+      q: "What does 'Ransomware-as-a-Service' (RaaS) mean?",
+      opts: [
+        "Government-licensed ransomware tools",
+        "Ransomware sold as a cloud subscription service by cybercriminals",
+        "Anti-ransomware protection sold to enterprises",
+        "Open-source ransomware repositories"
+      ],
+      correct: 1,
+      explain: "RaaS is a criminal business model where developers lease ransomware infrastructure and code to affiliates (hackers) who conduct attacks and split the ransom revenue. DarkSide, used in the Colonial Pipeline attack, operated as RaaS."
+    },
+    {
+      q: "Which law enforcement principle helped partially recover Colonial Pipeline's ransom payment?",
+      opts: [
+        "Blockchain reversal technology",
+        "FBI traced the Bitcoin wallet and seized funds under a court order",
+        "The attackers returned the money voluntarily",
+        "Cryptocurrency exchanges refunded the transaction"
+      ],
+      correct: 1,
+      explain: "The FBI tracked the Bitcoin payment to a specific wallet address and obtained a court order to seize approximately $2.3M of the $4.4M paid to DarkSide operators."
+    }
+  ],
+  ctf: [
+    {
+      q: "In a CTF, what does SQL injection typically allow an attacker to do?",
+      opts: [
+        "Crash the web server's CPU",
+        "Extract, modify, or delete database data by injecting SQL code into input fields",
+        "Intercept network traffic between users",
+        "Decrypt HTTPS traffic"
+      ],
+      correct: 1,
+      explain: "SQL injection inserts malicious SQL code into user input fields. If the application doesn't sanitize input, the database executes the injected query — allowing data exfiltration, authentication bypass, or even database deletion."
+    },
+    {
+      q: "What is steganography in a CTF context?",
+      opts: [
+        "Encrypting text with a Caesar cipher",
+        "Hiding secret data inside image, audio, or other media files",
+        "Cracking password hashes with a wordlist",
+        "Exploiting buffer overflow vulnerabilities"
+      ],
+      correct: 1,
+      explain: "Steganography hides data inside seemingly innocent files — images, audio, PDFs. In CTFs, players use tools like steghide, binwalk, or exiftool to extract hidden flags from media files."
+    },
+    {
+      q: "Which tool is most commonly used for network packet capture and analysis in CTFs?",
+      opts: ["Metasploit", "Wireshark", "Burp Suite", "Nmap"],
+      correct: 1,
+      explain: "Wireshark is the industry-standard packet analyzer for capturing and inspecting network traffic. In CTFs, it's used for network forensics challenges to find hidden data, credentials, or flags in PCAP files."
+    },
+    {
+      q: "What is a 'buffer overflow' vulnerability?",
+      opts: [
+        "Writing more data than a buffer can hold, overwriting adjacent memory and potentially executing arbitrary code",
+        "Sending too many HTTP requests to crash a server",
+        "Filling a database with duplicate records",
+        "Overloading a CPU with excessive computations"
+      ],
+      correct: 0,
+      explain: "A buffer overflow occurs when input exceeds the allocated buffer size, overwriting adjacent memory. Attackers can overwrite the return address to redirect execution to shellcode — a core skill in binary exploitation CTF challenges."
+    },
+    {
+      q: "What does ROT13 do to text, and why is it relevant to CTFs?",
+      opts: [
+        "Rotates each letter 13 positions in the alphabet — a basic substitution cipher often used to obscure CTF flags",
+        "Applies 13 rounds of AES encryption",
+        "Rotates the image 13 degrees to reveal hidden text",
+        "Base64-encodes text 13 times"
+      ],
+      correct: 0,
+      explain: "ROT13 shifts each letter 13 positions in the alphabet (A→N, B→O, etc.). It's trivially reversible and frequently appears in beginner CTFs to introduce encoding/cipher concepts."
+    }
+  ],
+  defense: [
+    {
+      q: "What does the principle of 'Least Privilege' mean in cybersecurity?",
+      opts: [
+        "Users should have the minimum access rights necessary to perform their job functions",
+        "Administrators should have fewer responsibilities than regular users",
+        "Security tools should use minimum computing resources",
+        "New employees start with no access until fully trained"
+      ],
+      correct: 0,
+      explain: "Least privilege ensures users and systems have only the minimum permissions needed. This limits the blast radius of a compromise — a breached account with limited privileges can do far less damage."
+    },
+    {
+      q: "What is the MITRE ATT&CK framework?",
+      opts: [
+        "A penetration testing methodology for compliance audits",
+        "A knowledge base of adversary tactics, techniques, and procedures based on real-world observations",
+        "A vendor-neutral firewall configuration standard",
+        "A certification exam framework for SOC analysts"
+      ],
+      correct: 1,
+      explain: "MITRE ATT&CK is a globally-accessible knowledge base documenting real-world attacker TTPs (Tactics, Techniques, Procedures). Blue teams use it to map detections, red teams use it for adversary emulation, and it's the backbone of modern threat intelligence."
+    },
+    {
+      q: "What does a SIEM (Security Information and Event Management) system do?",
+      opts: [
+        "Blocks malware at the network perimeter",
+        "Collects, correlates, and analyzes security log data from across the infrastructure to detect threats",
+        "Scans source code for vulnerabilities before deployment",
+        "Manages user identity and access rights"
+      ],
+      correct: 1,
+      explain: "SIEM platforms like Splunk, Microsoft Sentinel, and IBM QRadar aggregate logs from firewalls, endpoints, servers, and applications. They apply correlation rules and ML models to detect suspicious patterns and alert analysts."
+    },
+    {
+      q: "Which attack is being defended against by implementing multi-factor authentication (MFA)?",
+      opts: [
+        "DDoS attacks targeting availability",
+        "Credential stuffing and password-based account takeover",
+        "SQL injection into web applications",
+        "Man-in-the-middle attacks on HTTPS"
+      ],
+      correct: 1,
+      explain: "MFA adds a second verification factor beyond passwords. Even if credentials are stolen — as in the Colonial Pipeline breach — an attacker cannot authenticate without the additional factor (OTP, push notification, hardware key, etc.)."
+    },
+    {
+      q: "What is the '3-2-1' backup rule and why is it essential for ransomware defense?",
+      opts: [
+        "3 security tools, 2 firewalls, 1 honeypot",
+        "3 copies of data, on 2 different media types, with 1 copy stored offsite/offline",
+        "3 daily backups, 2 weekly, 1 monthly",
+        "3 team members review, 2 approve, 1 executes backups"
+      ],
+      correct: 1,
+      explain: "The 3-2-1 rule: keep 3 copies of data, on 2 different storage types, with 1 offsite/offline backup. Ransomware can't encrypt backups it can't reach — offline backups are the most reliable recovery mechanism when encryption attacks hit."
+    }
+  ]
+};
+
+const state = {};
+
+function initQuiz(id) {
+  const qs = quizData[id];
+  state[id] = { answers: new Array(qs.length).fill(null), correct: 0 };
+  const container = document.getElementById(`q-${id}-questions`);
+  container.innerHTML = '';
+  qs.forEach((q, i) => {
+    const letters = ['A','B','C','D'];
+    const optHtml = q.opts.map((o, j) => `
+      <button class="option" onclick="answer('${id}',${i},${j})">
+        <span class="opt-letter">${letters[j]}</span>
+        ${o}
+      </button>
+    `).join('');
+    container.innerHTML += `
+      <div class="question-card" id="qcard-${id}-${i}">
+        <div class="q-number">QUESTION ${String(i+1).padStart(2,'0')} / ${String(qs.length).padStart(2,'0')}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="options" id="opts-${id}-${i}">${optHtml}</div>
+        <div class="explain" id="explain-${id}-${i}">💡 ${q.explain}</div>
+      </div>
+    `;
+  });
+  updateScore(id);
+}
+
+function answer(id, qi, choice) {
+  if (state[id].answers[qi] !== null) return;
+  state[id].answers[qi] = choice;
+  const q = quizData[id][qi];
+  const opts = document.querySelectorAll(`#opts-${id}-${qi} .option`);
+  opts.forEach((o, j) => {
+    o.classList.add('disabled');
+    if (j === q.correct) o.classList.add('correct');
+    else if (j === choice && choice !== q.correct) o.classList.add('wrong');
+  });
+  document.getElementById(`explain-${id}-${qi}`).classList.add('show');
+  if (choice === q.correct) state[id].correct++;
+  updateScore(id);
+}
+
+function updateScore(id) {
+  const answered = state[id].answers.filter(a => a !== null).length;
+  document.getElementById(`score-${id}`).textContent = `${state[id].correct} / ${quizData[id].length}`;
+}
+
+function resetQuiz(id) {
+  initQuiz(id);
+}
+
+function switchQuiz(id) {
+  document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.quiz-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(`q-${id}`).classList.add('active');
+}
+
+// Init all quizzes
+['cybercrime','ctf','defense'].forEach(initQuiz);
+
+
+// ===== CHATBOT LOGIC =====
+function toggleChat() {
+  const win = document.getElementById('chat-window');
+  win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+  win.style.flexDirection = 'column';
+}
+
+document.getElementById('chat-toggle').addEventListener('click', toggleChat);
+
+document.getElementById('chat-send').addEventListener('click', sendMessage);
+document.getElementById('chat-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendMessage();
+});
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const msgs = document.getElementById('chat-messages');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Show user message
+  msgs.innerHTML += `<div class="chat-msg user">${text}</div>`;
+  input.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Show typing indicator
+  const typingId = 'typing-' + Date.now();
+  msgs.innerHTML += `<div class="chat-msg bot" id="${typingId}">⏳ Thinking...</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  try {
+    const response = await fetch("https://cyberpath-gmrz.onrender.com/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    messages: [
+      {
+        role: "system",
+        content: "You are CyberBot, an expert cybersecurity assistant embedded in CyberPath — a cybersecurity learning hub. Help users with: career paths, certifications (CEH, OSCP, CompTIA), CTF tips, tools (Nmap, Burp Suite, Wireshark), concepts (ransomware, zero-days, MITRE ATT&CK), and learning resources. Be concise, friendly, and use cybersecurity terminology naturally. Keep responses under 150 words."
+      },
+      { role: "user", content: text }
+    ]
+  })
+});
+
+const data = await response.json();
+const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't get a response.";
+document.getElementById(typingId).textContent = reply;
+  } catch (err) {
+    console.error('Error:', err);
+    document.getElementById(typingId).textContent = "⚠️ Connection error. Please try again.";
+  }
+
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+</body>
+</html>
